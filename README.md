@@ -1,5 +1,5 @@
 <p aligh="center">
-<img src="images/entra-id.png>
+<img src="images/entra-id.png">
 </p>
 
 <h1>Microsoft Entra ID - Identity Lifecycle Management (JML)</h1>
