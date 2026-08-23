@@ -39,7 +39,9 @@ A request was received to provision a new Finance employee, Daniel Morgan, with 
 <img src="images/step1.png" width="70%">
 
 ```powershell
-get-mguser -all | where-object displayname -eq "Daniel Morgan" | select-object displayname,userprincipalname,jobtitle,department
+get-mguser -all |
+where-object displayname -eq "Daniel Morgan" |
+select-object displayname,userprincipalname,jobtitle,department
 ```
 
 After confirming that the user did not exist, I provisioned the new account and configured the required identity attributes. Daniel was then assigned to the SG-Finance security group to provide access appropriate for his Finance role.
@@ -49,7 +51,8 @@ The account was verified after provisioning to confirm the correct user principa
 <img src="images/step2.png" width="70%">
 
 ```powershell
-get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled | select-object userprincipalname,displayname,department,jobtitle,accountenabled
+get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled |
+select-object userprincipalname,displayname,department,jobtitle,accountenabled
 ```
 
 Group membership was also verified in Microsoft Entra ID to confirm that Daniel was successfully assigned to SG-Finance.
@@ -72,10 +75,15 @@ After completing the changes, I verified the updated identity attributes using M
 
 ```powershell
 update-mguser -userid $daniel.id -department "IT" -jobtitle "Systems Analyst"
+
 remove-mggroupmemberbyref -groupid $financegroup.id -directoryobjectid $daniel.id
-$itgroup = get-mggroup -all | where-object displayname -eq "SG-IT"
+$itgroup = get-mggroup -all |
+where-object displayname -eq "SG-IT"
+
 new-mggroupmember -groupid $itgroup.id -directoryobjectid $daniel.id
-get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled | select-object userprincipalname,displayname,department,jobtitle,accountenabled
+
+get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled |
+select-object userprincipalname,displayname,department,jobtitle,accountenabled
 ```
 
 The resulting group membership was verified in Microsoft Entra ID to confirm that SG-Finance had been removed and SG-IT was assigned.
@@ -96,13 +104,16 @@ I disabled the Entra ID account, revoked active sign-in sessions, and removed Da
 
 ```powershell
 $daniel = get-mguser -all | where-object displayname -eq "Daniel Morgan"
-get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled | select-object userprincipalname,displayname,department,jobtitle,accountenabled
+
+get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled |
+select-object userprincipalname,displayname,department,jobtitle,accountenabled
 
 $params = @{ accountenabled = $false }
 update-mguser -userid $daniel.id -bodyparameter $params
 revoke-mgusersigninsession -userid $daniel.id
 
 $itgroup = get-mggroup -all | where-object displayname -eq "SG-IT"
+
 remove-mggroupmemberbyref -groupid $itgroup.id -directoryobjectid $daniel.id
 ```
 
@@ -111,7 +122,8 @@ After completing the deprovisioning actions, I verified that the account was dis
 <img src="images/step7.png" width="70%">
 
 ```powershell
-get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled | select-object userprincipalname,displayname,department,jobtitle,accountenabled
+get-mguser -userid $daniel.id -property userprincipalname,displayname,department,jobtitle,accountenabled |
+select-object userprincipalname,displayname,department,jobtitle,accountenabled
 ```
 
 Finally, I verified the user's group memberships in Microsoft Entra ID to confirm that SG-IT access had been removed.
