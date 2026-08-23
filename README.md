@@ -1,4 +1,4 @@
-<p aligh="center">
+<p align="center">
 <img src="images/entra-id.png">
 </p>
 
