@@ -1,3 +1,7 @@
+<p aligh="center">
+<img src="images/entra-id.png>
+</p>
+
 <h1>Microsoft Entra ID - Identity Lifecycle Management (JML)</h1>
 
 In this lab, I performed Joiner, Mover, and Leaver (JML) identity lifecycle tasks in Microsoft Entra ID. I provisioned a new user, assigned role-based group access, modified access after a department transfer, and deprovisioned the account after termination. Microsoft Graph PowerShell was used to perform and verify identity and access changes throughout the lab. <br />
