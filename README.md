@@ -77,8 +77,8 @@ After completing the changes, I verified the updated identity attributes using M
 update-mguser -userid $daniel.id -department "IT" -jobtitle "Systems Analyst"
 
 remove-mggroupmemberbyref -groupid $financegroup.id -directoryobjectid $daniel.id
-$itgroup = get-mggroup -all |
-where-object displayname -eq "SG-IT"
+
+$itgroup = get-mggroup -all | where-object displayname -eq "SG-IT"
 
 new-mggroupmember -groupid $itgroup.id -directoryobjectid $daniel.id
 
