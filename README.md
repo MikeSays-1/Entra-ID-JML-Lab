@@ -8,7 +8,7 @@ In this lab, I performed Joiner, Mover, and Leaver (JML) identity lifecycle task
 
 <h2>Environments and Technologies Used</h2>
 
-<img src="images/entra-skill-3.png" width="48px">&nbsp;&nbsp;<img src="https://skillicons.dev/icons?i=powershell"> 
+<img src="images/entra-skill-3.png" width="50px">&nbsp;&nbsp;<img src="https://skillicons.dev/icons?i=powershell"> 
 
 - Microsoft Entra ID
 - Microsoft Graph PowerShell
